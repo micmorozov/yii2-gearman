@@ -1,5 +1,5 @@
 <?php
-namespace Apollo\gearman;
+namespace Apollo\yii2-gearman;
 
 use Serializable;
 

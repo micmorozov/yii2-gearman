@@ -1,11 +1,11 @@
 <?php
-namespace Apollo\gearman;
+namespace Apollo\yii2-gearman;
 
 use Serializable;
 use GearmanException;
 use GearmanWorker;
 use Psr\Log\LoggerInterface;
-use Apollo\exception\ServerConnectionException;
+use Apollo\yii2-gearman\exception\ServerConnectionException;
 
 class Worker
 {

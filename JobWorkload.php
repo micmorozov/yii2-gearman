@@ -1,6 +1,6 @@
 <?php
 
-namespace Apollo\gearman;
+namespace Apollo\yii2-gearman;
 
 class JobWorkload extends \yii\base\Object implements \Serializable
 {

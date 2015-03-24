@@ -1,12 +1,12 @@
 <?php
 
-namespace Apollo\gearman;
+namespace Apollo\yii2-gearman;
 
 use Yii;
 use yii\console\Controller;
 use yii\helpers\Console;
-use Apollo\Process;
-use Apollo\Application;
+use Apollo\yii2-gearman\Process;
+use Apollo\yii2-gearman\Application;
 
 class GearmanController extends Controller
 {

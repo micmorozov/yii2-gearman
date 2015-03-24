@@ -1,5 +1,5 @@
 <?php
-namespace shakura\yii2\gearman;
+namespace Apollo\yii2-gearman;
 
 use Closure;
 use Exception;
