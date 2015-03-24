@@ -1,8 +1,9 @@
 yii2-gearman
 ============
 
-This extension built on [this](https://github.com/Filsh/yii2-gearman) and [this](https://github.com/sinergi/gearman).
-The goal of the project is opportunity of starting multiple worker processes on one machine. 
+This extension built on [this](https://github.com/Filsh/yii2-gearman) and [this](https://github.com/sinergi/gearman) and [this](https://github.com/shakura/yii2-gearman)
+The goal of the project is opportunity of starting multiple worker processes on one machine. Work only as process(fork).
+In config you can set count of nodes, look 'Configuration'
 
 ## Installation
 
@@ -11,7 +12,7 @@ It is recommended that you install the Gearman library [through composer](http:/
 ```json
 {
     "require": {
-       "shakura/yii2-gearman": "dev-master"
+       "apollo/yii2-gearman": "dev-master"
     }
 }
 ```
@@ -21,7 +22,7 @@ It is recommended that you install the Gearman library [through composer](http:/
 ```php
 'components' => [
   'gearman' => [
-      'class' => 'shakura\yii2\gearman\GearmanComponent',
+      'class' => 'apollo\yii2-gearman\GearmanComponent',
       'servers' => [
           ['host' => '127.0.0.1', 'port' => 4730],
       ],
@@ -37,8 +38,9 @@ It is recommended that you install the Gearman library [through composer](http:/
 ...
 'controllerMap' => [
     'gearman' => [
-        'class' => 'shakura\yii2\gearman\GearmanController',
-        'gearmanComponent' => 'gearman'
+        'class' => 'apollo\yii2-gearman\GearmanController',
+        'gearmanComponent' => 'gearman',
+        'count'=>10 // default count 1
     ],
     ...
 ],
@@ -49,7 +51,7 @@ It is recommended that you install the Gearman library [through composer](http:/
 ```php
 namespace common\jobs;
 
-use shakura\yii2\gearman\JobBase;
+use apollo\yii2-gearman\JobBase;
 
 class SyncCalendar extends JobBase
 {
@@ -63,9 +65,9 @@ class SyncCalendar extends JobBase
 ## Manage workers
 
 ```cmd
-yii gearman/start 1 // start the worker with unique id
-yii gearman/restart 1 // restart worker
-yii gearman/stop 1 // stop worker
+yii gearman/start  // start the worker
+yii gearman/restart  // restart worker
+yii gearman/stop // stop worker
 ```
 
 ## Example using Dispatcher

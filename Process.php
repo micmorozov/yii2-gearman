@@ -1,5 +1,5 @@
 <?php
-namespace shakura\yii2\gearman;
+namespace Apollo\gearman;
 
 use Serializable;
 use Psr\Log\LoggerInterface;
@@ -62,10 +62,10 @@ class Process
     {
         if (file_exists($file = $this->getPidFile())) {
             $pid = (int)file_get_contents($this->getPidFile());
-        }
 
+        }
         if (isset($pid) && $pid) {
-            posix_kill($pid, SIGUSR1);
+              posix_kill($pid, SIGKILL);
             if (null !== $this->logger) {
                 $this->logger->debug("Stopped GearmanWorker Daemon {$pid}");
             }

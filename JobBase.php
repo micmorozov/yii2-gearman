@@ -1,6 +1,6 @@
 <?php
 
-namespace shakura\yii2\gearman;
+namespace Apollo\gearman;
 
 abstract class JobBase extends \yii\base\Component implements JobInterface
 {

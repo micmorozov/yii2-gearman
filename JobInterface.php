@@ -1,5 +1,5 @@
 <?php
-namespace shakura\yii2\gearman;
+namespace Apollo\gearman;
 
 use GearmanJob;
 

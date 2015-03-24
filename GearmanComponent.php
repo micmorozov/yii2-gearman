@@ -1,63 +1,69 @@
 <?php
 
-namespace shakura\yii2\gearman;
+namespace Apollo\gearman;
 
 use Yii;
-use shakura\yii2\gearman\Application;
-use shakura\yii2\gearman\Dispatcher;
-use shakura\yii2\gearman\Config;
-use shakura\yii2\gearman\Process;
+use Apollo\Application;
+use Apollo\Dispatcher;
+use Apollo\Config;
+use Apollo\Process;
 
 class GearmanComponent extends \yii\base\Component
 {
     public $servers;
-    
+
     public $user;
-    
+
     public $jobs = [];
-    
+
     private $_application;
-    
+
     private $_dispatcher;
-    
+
     private $_config;
-    
+
     private $_process;
-    
-    public function getApplication($id)
+
+    public function getApplication()
     {
-        if($this->_application === null) {
-            $app = new Application($id, $this->getConfig(), $this->getProcess($id));
-            foreach($this->jobs as $name => $job) {
+        if ($this->_application === null) {
+            $app = [];
+            foreach ($this->jobs as $name => $job) {
                 $job = Yii::createObject($job);
-                if(!($job instanceof JobInterface)) {
+                if (!($job instanceof JobInterface)) {
                     throw new \yii\base\InvalidConfigException('Gearman job must be instance of JobInterface.');
                 }
-                
+
                 $job->setName($name);
-                $app->add($job);
+                for ($i = 0; $i < $job->count; $i++) {
+
+                    $this->_process = null;
+                    $application = new Application($name.$i, $this->getConfig(), $this->getProcess($name.$i));
+                    $application->add($job);
+                    $app[]=$application;
+                }
             }
             $this->_application = $app;
         }
-        
+
         return $this->_application;
     }
-    
+
     public function getDispatcher()
     {
-        if($this->_dispatcher === null) {
+        if ($this->_dispatcher === null) {
             $this->_dispatcher = new Dispatcher($this->getConfig());
         }
-        
+
         return $this->_dispatcher;
     }
-    
+
     public function getConfig()
     {
-        if($this->_config === null) {
+        if ($this->_config === null) {
             $servers = [];
-            foreach($this->servers as $server) {
-                if(is_array($server) && isset($server['host'], $server['port'])) {
+            foreach ($this->servers as $server) {
+                if (is_array($server) && isset($server['host'], $server['port'])) {
                     $servers[] = implode(Config::SERVER_PORT_SEPARATOR, [$server['host'], $server['port']]);
                 } else {
                     $servers[] = $server;
@@ -69,16 +75,16 @@ class GearmanComponent extends \yii\base\Component
                 'user' => $this->user
             ]);
         }
-        
+
         return $this->_config;
     }
-    
+
     public function setConfig(Config $config)
     {
         $this->_config = $config;
         return $this;
     }
-    
+
     /**
      * @return Process
      */
@@ -89,7 +95,7 @@ class GearmanComponent extends \yii\base\Component
         }
         return $this->_process;
     }
-    
+
     /**
      * @param Process $process
      * @return $this

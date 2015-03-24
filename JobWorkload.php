@@ -1,6 +1,6 @@
 <?php
 
-namespace shakura\yii2\gearman;
+namespace Apollo\gearman;
 
 class JobWorkload extends \yii\base\Object implements \Serializable
 {

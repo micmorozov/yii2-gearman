@@ -1,18 +1,18 @@
 {
-    "name": "shakura/yii2-gearman",
-    "description": "Gearman handler for PHP",
+    "name": "apollo/yii2-gearman",
+    "description": "Gearman handler for PHP (fork)",
     "keywords": ["yii", "extension"],
-    "homepage": "https://github.com/shakura/yii2-gearman",
+    "homepage": "https://github.com/vov4ik08/yii2-gearman",
     "type": "yii2-extension",
     "license": "MIT",
     "support": {
-        "email": "waclaw@shakura.ru",
-        "source": "https://github.com/shakura/yii2-gearman"
+        "email": "vov4ik08@gmail.com",
+        "source": "https://github.com/vov4ik08/yii2-gearman"
     },
     "authors": [
         {
-            "name": "Waclaw Shakura",
-            "email": "waclaw@shakura.ru"
+            "name": "Vladimir Boiko",
+            "email": "vov4ik08@gmail.com"
         }
     ],
     "require": {
@@ -29,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-            "shakura\\yii2\\gearman\\": ""
+          "Apollo\\": ""
         }
     }
 }
