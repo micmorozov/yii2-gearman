@@ -39,7 +39,7 @@ It is recommended that you install the Gearman library [through composer](http:/
 ...
 'controllerMap' => [
     'gearman' => [
-        'class' => 'apollo\yii2-gearman\GearmanController',
+        'class' => 'apollo\yii2\gearman\GearmanController',
         'gearmanComponent' => 'gearman',
     ],
     ...
