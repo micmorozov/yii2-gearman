@@ -29,7 +29,8 @@ It is recommended that you install the Gearman library [through composer](http:/
       'user' => 'www-data',
       'jobs' => [
           'syncCalendar' => [
-              'class' => 'common\jobs\SyncCalendar'
+              'class' => 'common\jobs\SyncCalendar',
+              'count'=>10 // default count 1
           ],
           ...
       ]
@@ -40,7 +41,6 @@ It is recommended that you install the Gearman library [through composer](http:/
     'gearman' => [
         'class' => 'apollo\yii2-gearman\GearmanController',
         'gearmanComponent' => 'gearman',
-        'count'=>10 // default count 1
     ],
     ...
 ],
