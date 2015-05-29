@@ -22,7 +22,7 @@ It is recommended that you install the Gearman library [through composer](http:/
 ```php
 'components' => [
   'gearman' => [
-      'class' => 'apollo\yii2-gearman\GearmanComponent',
+      'class' => 'apollo\yii2\gearman\GearmanComponent',
       'servers' => [
           ['host' => '127.0.0.1', 'port' => 4730],
       ],
