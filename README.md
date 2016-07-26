@@ -12,7 +12,7 @@ It is recommended that you install the Gearman library [through composer](http:/
 ```json
 {
     "require": {
-       "apollo/yii2-gearman": "dev-master"
+       "micmorozov/yii2-gearman": "dev-master"
     }
 }
 ```
@@ -22,7 +22,7 @@ It is recommended that you install the Gearman library [through composer](http:/
 ```php
 'components' => [
   'gearman' => [
-      'class' => 'apollo\yii2\gearman\GearmanComponent',
+      'class' => 'micmorozov\yii2\gearman\GearmanComponent',
       'servers' => [
           ['host' => '127.0.0.1', 'port' => 4730],
       ],
@@ -39,7 +39,7 @@ It is recommended that you install the Gearman library [through composer](http:/
 ...
 'controllerMap' => [
     'gearman' => [
-        'class' => 'apollo\yii2\gearman\GearmanController',
+        'class' => 'micmorozov\yii2\gearman\GearmanController',
         'gearmanComponent' => 'gearman',
     ],
     ...
@@ -51,7 +51,7 @@ It is recommended that you install the Gearman library [through composer](http:/
 ```php
 namespace common\jobs;
 
-use apollo\yii2-gearman\JobBase;
+use micmorozov\yii2-gearman\JobBase;
 
 class SyncCalendar extends JobBase
 {

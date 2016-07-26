@@ -1,12 +1,12 @@
 <?php
 
-namespace apollo\yii2\gearman;
+namespace micmorozov\yii2\gearman;
 
 use Yii;
-use apollo\yii2\gearman\Application;
-use apollo\yii2\gearman\Dispatcher;
-use apollo\yii2\gearman\Config;
-use apollo\yii2\gearman\Process;
+use micmorozov\yii2\gearman\Application;
+use micmorozov\yii2\gearman\Dispatcher;
+use micmorozov\yii2\gearman\Config;
+use micmorozov\yii2\gearman\Process;
 
 class GearmanComponent extends \yii\base\Component
 {

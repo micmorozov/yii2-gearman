@@ -1,10 +1,10 @@
 <?php
-namespace apollo\yii2\gearman;
+namespace micmorozov\yii2\gearman;
 
 use GearmanException;
 use GearmanClient;
 use Psr\Log\LoggerInterface;
-use apollo\yii2\gearman\ServerConnectionException;
+use micmorozov\yii2\gearman\ServerConnectionException;
 
 class Client
 {

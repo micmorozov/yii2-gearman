@@ -1,5 +1,5 @@
 <?php
-namespace apollo\yii2\gearman\exception;
+namespace micmorozov\yii2\gearman\exception;
 
 use Exception;
 
