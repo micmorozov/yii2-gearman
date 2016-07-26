@@ -1,5 +1,5 @@
 {
-    "name": "Ferrum-fist/yii2-gearman",
+    "name": "ferrumfist/yii2-gearman",
     "description": "Gearman handler for PHP (fork)",
     "keywords": ["yii", "extension"],
     "homepage": "https://github.com/vov4ik08/yii2-gearman",
@@ -7,7 +7,7 @@
     "license": "MIT",
     "support": {
         "email": "ferrumfist@gmail.com",
-        "source": "https://github.com/Ferrum-fist/yii2-gearman"
+        "source": "https://github.com/ferrumfist/yii2-gearman"
     },
     "authors": [
         {
@@ -29,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-          "Ferrum-fist\\yii2\\gearman\\": ""
+          "ferrumfist\\yii2\\gearman\\": ""
         }
     }
 }
