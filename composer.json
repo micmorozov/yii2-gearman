@@ -29,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-          "apollo\\yii2\\gearman\\": ""
+          "Ferrum-fist\\yii2\\gearman\\": ""
         }
     }
 }
