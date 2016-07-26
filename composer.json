@@ -1,18 +1,18 @@
 {
-    "name": "apollo/yii2-gearman",
+    "name": "Ferrum-fist/yii2-gearman",
     "description": "Gearman handler for PHP (fork)",
     "keywords": ["yii", "extension"],
     "homepage": "https://github.com/vov4ik08/yii2-gearman",
     "type": "yii2-extension",
     "license": "MIT",
     "support": {
-        "email": "vov4ik08@gmail.com",
-        "source": "https://github.com/vov4ik08/yii2-gearman"
+        "email": "ferrumfist@gmail.com",
+        "source": "https://github.com/Ferrum-fist/yii2-gearman"
     },
     "authors": [
         {
-            "name": "Vladimir Boiko",
-            "email": "vov4ik08@gmail.com"
+            "name": "Yaroslav Spirin",
+            "email": "ferrumfist@gmail.com"
         }
     ],
     "require": {
