@@ -73,6 +73,8 @@ class Application
      * @var Application
      */
     private static $instance;
+    
+    private $pid;
 
     /**
      * gets the instance via lazy initialization (created on first usage)
@@ -127,6 +129,10 @@ class Application
         }
     }
 
+    public function getPid(){
+    	return $this->pid;
+    }
+    
     public function restart()
     {
         $serialized = serialize($this);
@@ -157,7 +163,7 @@ class Application
      */
     public function run($fork = true, $restart = false)
     {
-        $this->runProcess($fork, $restart);
+        return $this->runProcess($fork, $restart);
     }
 
     public function addEnvVariables()
@@ -171,11 +177,12 @@ class Application
     }
 
     /**
+     * 
      * @param bool $fork
      * @throws Exception
+     * @return boolean
      */
-    public function runProcess($fork = true, $restart = false)
-    {
+    public function runProcess($fork = true, $restart = false){
         $pidFile = $this->getProcess()->getPidFile();
         $lockFile = $this->getProcess()->getLockFile();
         if (is_file($pidFile) && is_writable($pidFile)) {
@@ -221,6 +228,16 @@ class Application
                 pcntl_signal_dispatch();
             }
         }
+        
+        $parent = $pid > 0 ? true : false;
+        
+        //если класс в родительском процессе,
+        //то сохраняем в нем pid
+        if( $parent ){
+        	$this->pid = $pid;
+        }
+        
+        return $parent;
     }
 
     /**

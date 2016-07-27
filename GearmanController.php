@@ -6,7 +6,7 @@ use Yii;
 use yii\console\Controller;
 use yii\helpers\Console;
 use micmorozov\yii2\gearman\Process;
-use micmorozov\yii2\gearman\Application;
+use micmorozov\yii2\gearman\MasterApplication;
 
 class GearmanController extends Controller
 {
@@ -17,38 +17,26 @@ class GearmanController extends Controller
 
     public $gearmanComponent = 'gearman';
 
+    protected function getMaster(){
+    	return new MasterApplication($this->gearmanComponent, $this->fork);
+    }
 
     public function actionStart()
     {
-        $app = $this->getApplication();
-        foreach ($app as $value) {
-            $this->runApplication($value);
-        }
+    	$master = $this->getMaster();
+    	$master->start();
     }
 
     public function actionStop()
     {
-        $app = $this->getApplication();
-        foreach ($app as $value) {
-
-            $process = $value->getProcess($value->workerId);
-
-            if ($process->isRunning()) {
-                $this->stdout("Success: Process is stopped\n", Console::FG_GREEN);
-            } else {
-                $this->stdout("Failed: Process is not stopped\n", Console::FG_RED);
-            }
-
-            $process->stop();
-
-        }
-
+    	$master = $this->getMaster();
+    	$master->stop();
     }
 
     public function actionRestart()
     {
-        $this->actionStop();
-        $this->actionStart();
+    	$master = $this->getMaster();
+    	$master->restart();
     }
 
     public function options($id)
@@ -65,17 +53,5 @@ class GearmanController extends Controller
     {
         $component = Yii::$app->get($this->gearmanComponent);
         return $component->getApplication();
-    }
-
-    protected function runApplication(Application $app)
-    {
-        $fork = (bool)$this->fork;
-        if ($fork) {
-            $this->stdout("Success: Process is started\n", Console::FG_GREEN);
-        } else {
-            $this->stdout("Success: Process is started, but not daemonized\n", Console::FG_YELLOW);
-        }
-
-        $app->run((bool)$this->fork);
     }
 }
