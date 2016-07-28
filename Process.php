@@ -65,7 +65,9 @@ class Process
 
         }
         if (isset($pid) && $pid) {
-              posix_kill($pid, $force ? SIGKILL : SIGTERM);
+			posix_kill($pid, $force ? SIGKILL : SIGTERM);
+			// wait process ends
+			pcntl_waitpid($pid, $status, WNOHANG);
             if (null !== $this->logger) {
                 $this->logger->debug("Stopped GearmanWorker Daemon {$pid}");
             }
