@@ -58,14 +58,14 @@ class Process
         return sys_get_temp_dir() . DIRECTORY_SEPARATOR . self::LOCK_FILE . '.' . $this->workerId . '.lock';
     }
 
-    public function stop()
+    public function stop($force=false)
     {
         if (file_exists($file = $this->getPidFile())) {
             $pid = (int)file_get_contents($this->getPidFile());
 
         }
         if (isset($pid) && $pid) {
-              posix_kill($pid, SIGKILL);
+              posix_kill($pid, $force ? SIGKILL : SIGTERM);
             if (null !== $this->logger) {
                 $this->logger->debug("Stopped GearmanWorker Daemon {$pid}");
             }
