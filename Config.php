@@ -50,6 +50,8 @@ class Config implements Serializable
      */
     private static $instance;
 
+    private $stdStreams;
+
     /**
      * gets the instance via lazy initialization (created on first usage)
      *
@@ -117,6 +119,9 @@ class Config implements Serializable
                     case 'user':
                         $this->setUser($value);
                         break;
+                    case 'stdStreams':
+                        $this->setStdStreams($value);
+                        break;
                 }
             }
         }
@@ -156,6 +161,9 @@ class Config implements Serializable
                 break;
             case 'user':
                 return $this->getUser();
+                break;
+            case 'stdStreams':
+                return $this->getStdStreams();
                 break;
         }
         return null;
@@ -342,6 +350,15 @@ class Config implements Serializable
     public function getUser()
     {
         return $this->user;
+    }
+
+    public function setStdStreams($value){
+        $this->stdStreams = $value;
+        return $this;
+    }
+
+    public function getStdStreams(){
+        return $this->stdStreams;
     }
 
     /**

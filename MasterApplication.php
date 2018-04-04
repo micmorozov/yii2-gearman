@@ -18,6 +18,10 @@ class MasterApplication
     
     private $signalCommand;
 
+    private $stdIn;
+    private $stdOut;
+    private $stdErr;
+
     /**
      * @param unknown $gearmanComponent
      * @param unknown $fork
@@ -29,6 +33,8 @@ class MasterApplication
     }
     
     public function start(){
+        $this->closeStdStreams();
+
     	//после команды "старт" создадим дочерний поток,
     	//который будет следить за воркерами
     	
@@ -63,6 +69,46 @@ class MasterApplication
     		//родитель ничего не делает
     		return true;
     	}
+    }
+
+    protected function closeStdStreams(){
+        /** @var GearmanComponent $gearmanComponent */
+        $gearmanComponent = Yii::$app->get($this->gearmanComponent);
+        $stdStreams = $gearmanComponent->getConfig()->getStdStreams();
+
+        if( isset($stdStreams['STDIN']) && $stdStreams['STDIN'] ){
+            if (is_resource(STDIN)){
+                fclose(STDIN);
+
+                $this->stdIn = fopen(Yii::getAlias($stdStreams['STDIN']), 'r');
+            }
+        }
+
+        if( isset($stdStreams['STDOUT']) && $stdStreams['STDOUT'] ){
+            if (is_resource(STDOUT)){
+                fclose(STDOUT);
+
+                $path = Yii::getAlias($stdStreams['STDOUT']);
+                $dirPath = dirname($path);
+                if(!is_dir($dirPath))
+                    mkdir(dirname($path), 0777, true);
+
+                $this->stdIn = fopen(Yii::getAlias($stdStreams['STDOUT']), 'ab');
+            }
+        }
+
+        if( isset($stdStreams['STDERR']) && $stdStreams['STDERR'] ){
+            if (is_resource(STDERR)){
+                fclose(STDERR);
+
+                $path = Yii::getAlias($stdStreams['STDERR']);
+                $dirPath = dirname($path);
+                if(!is_dir($dirPath))
+                    mkdir($dirPath, 0777, true);
+
+                $this->stdErr = fopen(Yii::getAlias($stdStreams['STDERR']), 'ab');
+            }
+        }
     }
     
     protected function startApp($app){

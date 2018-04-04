@@ -24,6 +24,12 @@ class GearmanComponent extends \yii\base\Component
 
     private $_process;
 
+    public $stdStreams = [
+        'STDIN' => false,
+        'STDOUT' => false,
+        'STDERR' => false
+    ];
+
     public function getApplication()
     {
         if ($this->_application === null) {
@@ -72,7 +78,8 @@ class GearmanComponent extends \yii\base\Component
 
             $this->_config = new Config([
                 'servers' => $servers,
-                'user' => $this->user
+                'user' => $this->user,
+                'stdStreams' => $this->stdStreams
             ]);
         }
 
