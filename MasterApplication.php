@@ -139,6 +139,7 @@ class MasterApplication
     }
     
     protected function getApplication(){
+        /** @var GearmanComponent $component */
     	$component = Yii::$app->get($this->gearmanComponent);
     	return $component->getApplication();
     }
