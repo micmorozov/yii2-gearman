@@ -51,7 +51,7 @@ It is recommended that you install the Gearman library [through composer](http:/
 ```php
 namespace common\jobs;
 
-use micmorozov\yii2-gearman\JobBase;
+use micmorozov\yii2\gearman\JobBase;
 
 class SyncCalendar extends JobBase
 {
